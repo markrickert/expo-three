@@ -7,7 +7,7 @@ import { Asset } from 'expo-asset';
 import { ExpoWebGLRenderingContext, GLView } from 'expo-gl';
 import { loadAsync, Renderer, TextureLoader } from 'expo-three';
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { MeshBasicMaterial } from 'three';
 import {
   AmbientLight,
@@ -98,18 +98,20 @@ function App() {
         'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/obj/walt/WaltHead.mtl',
     };
 
-    const object = await loadAsync(
-      [model['3d.obj'], model['3d.mtl']],
-      // @ts-ignore
-      null,
-      (name) => model[name]
-    );
+    if (Platform.OS !== 'web') {
+      const object = await loadAsync(
+        [model['3d.obj'], model['3d.mtl']],
+        // @ts-ignore
+        null,
+        (name) => model[name]
+      );
 
-    object.position.y += 2;
-    object.position.z -= 2;
-    object.scale.set(0.02, 0.02, 0.02);
+      object.position.y += 2;
+      object.position.z -= 2;
+      object.scale.set(0.02, 0.02, 0.02);
 
-    scene.add(object);
+      scene.add(object);
+    }
 
     camera.lookAt(remoteCube.position);
 
@@ -154,7 +156,7 @@ class RemoteIconMesh extends IconMesh {
   constructor() {
     super();
     loadAsync(
-      'https://github.com/expo/expo/blob/main/apps/bare-expo/assets/splash.png?raw=true'
+      'https://raw.githubusercontent.com/expo/expo/main/apps/bare-expo/assets/splash.png'
     ).then((texture) => {
       this.material = new MeshBasicMaterial({ map: texture });
     });
