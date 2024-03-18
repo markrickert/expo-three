@@ -11,6 +11,7 @@ export { default as loadCubeTextureAsync } from './loadCubeTextureAsync';
 export { default as parseAsync } from './parseAsync';
 export { default as THREE } from './Three';
 export { default as TextureLoader } from './TextureLoader';
+export * from './MaterialXLoader';
 
 export { utils, Renderer };
 

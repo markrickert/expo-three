@@ -2,6 +2,7 @@ import { ColladaLoader } from 'three/examples/jsm/loaders/ColladaLoader';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+import { MaterialXLoader } from 'three/examples/jsm/loaders/MaterialXLoader';
 
 function getExtension(uri: string): string {
   const lastUriComponent = uri.split('.').pop() as string;
@@ -27,6 +28,8 @@ export function loaderClassForExtension(extension: string): any {
       return MTLLoader;
     case 'dae':
       return ColladaLoader;
+    case 'mtlx':
+      return MaterialXLoader;
     default:
       throw new Error(
         'ExpoTHREE.loaderClassForExtension(): Unrecognized file type ' +

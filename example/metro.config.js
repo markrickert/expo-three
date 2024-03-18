@@ -24,6 +24,8 @@ config.resolver.extraNodeModules = {
 };
 
 config.resolver.assetExts.push('png');
+config.resolver.assetExts.push('glb');
+config.resolver.assetExts.push('hdr');
 config.resolver.sourceExts = config.resolver.sourceExts.filter(
   (ext) => ext !== 'png'
 );
